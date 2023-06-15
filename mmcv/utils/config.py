@@ -330,8 +330,10 @@ class Config:
                  import_custom_modules=True):
         cfg_dict, cfg_text = Config._file2dict(filename,
                                                use_predefined_variables)
+        #print("AE 5: " + str(cfg_dict) + " :!: " + str(cfg_text)) # AE:
         if import_custom_modules and cfg_dict.get('custom_imports', None):
             import_modules_from_strings(**cfg_dict['custom_imports'])
+            #print("AE 6: " + str(cfg_dict)) # AE:
         return Config(cfg_dict, cfg_text=cfg_text, filename=filename)
 
     @staticmethod
