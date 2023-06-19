@@ -2,6 +2,7 @@
 import inspect
 import warnings
 from functools import partial
+#import traceback # AE:
 
 from .misc import is_seq_of
 
@@ -31,11 +32,15 @@ def build_from_cfg(cfg, registry, default_args=None):
         raise TypeError('default_args must be a dict or None, '
                         f'but got {type(default_args)}')
 
+    #traceback.print_stack() # AE:
     args = cfg.copy()
 
     if default_args is not None:
         for name, value in default_args.items():
             args.setdefault(name, value)
+            #print("AE adding : " + name + " : " + str(value) ) # AE:
+
+    #print(args) # AE:
 
     obj_type = args.pop('type')
     if isinstance(obj_type, str):
@@ -192,6 +197,7 @@ class Registry:
         Returns:
             class: The corresponding class.
         """
+        #print(self._module_dict) # AE:
         scope, real_key = self.split_scope_key(key)
         if scope is None or scope == self._scope:
             # get from self
@@ -246,6 +252,8 @@ class Registry:
                 raise KeyError(f'{name} is already registered '
                                f'in {self.name}')
             self._module_dict[name] = module_class
+            #print("AE: " + name + " : " + str(module_class)) # AE:
+            #traceback.print_stack()
 
     def deprecated_register_module(self, cls=None, force=False):
         warnings.warn(

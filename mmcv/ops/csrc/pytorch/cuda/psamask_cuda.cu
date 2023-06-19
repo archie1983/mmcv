@@ -2,6 +2,10 @@
 // Modified from
 // https://github.com/hszhao/semseg/blob/master/lib/psa/src
 
+//#include <THC/THC.h>
+#include <ATen/cuda/CUDAContext.h>
+#include <ATen/cuda/CUDAEvent.h>
+
 #include <torch/serialize/tensor.h>
 
 #include "psamask_cuda_kernel.cuh"
